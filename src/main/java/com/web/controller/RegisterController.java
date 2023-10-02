@@ -274,24 +274,26 @@ public class RegisterController {
 	{
 		String email = login.getEmail();
 		String password = login.getPassword();
-
+		System.out.println("log not null" + email);
+		System.out.println("log not null" + password);
 		Register1 emp1 = repo8.findByEmailAndPassword(email, password);
 		if (emp1 == null) {
+			System.out.println("emp1 is null");
 			return "Invalid Credits";
-		}
 
-		model.addAttribute("command", emp1);
+		}
+		System.out.println("emp1 not  null");
 
 		// start
 
-		Register log = service.login(login.getEmail(), login.getPassword());
+		Register1 log = service1.login(login.getEmail(), login.getPassword());
 
 		if (log != null) {
-
+			System.out.println("log not null");
 			return "adminlogin";
 
 		} else {
-
+			System.out.println("log  null");
 			return "delete1";
 		}
 
