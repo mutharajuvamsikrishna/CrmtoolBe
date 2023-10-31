@@ -1,81 +1,77 @@
 package com.web.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "Reg3")
 public class Register implements Serializable {
-    /**
+	/**
 	 * 
 	 */
-	//private static final long serialVersionUID = -6206009238197715960L;;
+	// private static final long serialVersionUID = -6206009238197715960L;;
 
 	@Id
-    private String email;
-    private String ename;
-    private String mob;
-    private String password;
-    private String cnpassword;
+	private String email;
+	private String ename;
+	private String mob;
+	private String password;
+	private String cnpassword;
 
-    public Register() {
-        // Default constructor
-    }
+	public Register() {
+		// Default constructor
+	}
 
-    // Getters and setters
+	// Getters and setters
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getEname() {
-        return ename;
-    }
+	public String getEname() {
+		return ename;
+	}
 
-    public void setEname(String ename) {
-        this.ename = ename;
-    }
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
 
-    public String getMob() {
-        return mob;
-    }
+	public String getMob() {
+		return mob;
+	}
 
-    public void setMob(String mob) {
-        this.mob = mob;
-    }
+	public void setMob(String mob) {
+		this.mob = mob;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getCnpassword() {
-        return cnpassword;
-    }
+	public String getCnpassword() {
+		return cnpassword;
+	}
 
-    public void setCnpassword(String cnpassword) {
-        this.cnpassword = cnpassword;
-    }
+	public void setCnpassword(String cnpassword) {
+		this.cnpassword = cnpassword;
+	}
 
-    // toString method
+	// toString method
 
-    @Override
-    public String toString() {
-        return "Register{" +
-                "email='" + email + '\'' +
-                ", ename='" + ename + '\'' +
-                ", mob='" + mob + '\'' +
-                ", password='" + password + '\'' +
-                ", cnpassword='" + cnpassword + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Register{" + "email='" + email + '\'' + ", ename='" + ename + '\'' + ", mob='" + mob + '\''
+				+ ", password='" + password + '\'' + ", cnpassword='" + cnpassword + '\'' + '}';
+	}
 }

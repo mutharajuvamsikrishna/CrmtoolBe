@@ -14,7 +14,7 @@ public interface ProRepo extends CrudRepository<Pro, Long> {
 			+ "OR p.lastres LIKE CONCAT('%', :query, '%')" + "OR p.linkprof LIKE CONCAT('%', :query, '%')"
 			+ "OR p.pocstatus LIKE CONCAT('%', :query, '%')" + "OR p.maincontact LIKE CONCAT('%', :query, '%')"
 			+ "OR p.intrestserv LIKE CONCAT('%', :query, '%')" + "OR p.lfstatus LIKE CONCAT('%', :query, '%')"
-			+ "OR p.mainemail LIKE CONCAT('%', :query, '%')")
+			+ "OR p.mainemail LIKE CONCAT('%', :query, '%')" + "OR p.id LIKE CONCAT('%', :query, '%')")
 	List<Pro> searchPro(@Param("query") String query);
 
 	List<Pro> findAll();

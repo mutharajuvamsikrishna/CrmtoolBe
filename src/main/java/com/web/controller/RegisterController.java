@@ -429,4 +429,13 @@ public class RegisterController {
 		return emp1;
 
 	}
+
+	@GetMapping("/adminreg")
+	public Register1 adminregisterdetails(@RequestParam String email) {
+
+		Register1 emp1 = repo8.findByEmail(email);
+
+		return emp1;
+
+	}
 }
