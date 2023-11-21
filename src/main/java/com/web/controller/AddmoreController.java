@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.model.Addmore;
+import com.web.model.MyClass;
 import com.web.service.AddmoreService;
 import com.web.service.ViewAddmoreDetails;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = MyClass.BASE_URL)
 public class AddmoreController {
 
 	@Autowired

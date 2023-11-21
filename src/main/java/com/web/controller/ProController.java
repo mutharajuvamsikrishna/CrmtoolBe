@@ -1,7 +1,6 @@
 package com.web.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -13,17 +12,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.web.model.MyClass;
 import com.web.model.Pro;
 import com.web.repo.ProRepo;
+import com.web.service.ViewAddmoreDetails;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = MyClass.BASE_URL)
 public class ProController {
 
 	@Autowired
 	private ProRepo proRepo;
 	@Autowired
 	private ProRepo repo1;
+	@Autowired
+	ViewAddmoreDetails service;
 
 	@GetMapping("/req")
 
@@ -48,13 +51,9 @@ public class ProController {
 	}
 
 	@PutMapping("/usereditupdate")
-	public String updateUserEdit(@RequestBody Pro pro) {
-		Long id = pro.getId();
-		Optional<Pro> pro1 = repo1.findById(id);
-		if (pro1 != null) {
-			repo1.save(pro);
-		}
-		return "updated successfullly";
+	public String updateUserEdit1(@RequestBody Pro pro) {
+
+		return service.updateUserEdit(pro);
 	}
 
 }

@@ -24,7 +24,7 @@ public class Pro {
 	private String moredetail;
 	private String infoshared;
 	private String detailask;
-
+	private String followup;
 	private String website;
 
 	private String linkprof;
@@ -52,6 +52,7 @@ public class Pro {
 	private String emstate1;
 	private String emsummary1;
 	private String emdate2;
+	private String emname2;
 	private String emtoname2;
 	private String emstate2;
 	private String emsummary2;
@@ -178,6 +179,14 @@ public class Pro {
 
 	public void setDetailask(String detailask) {
 		this.detailask = detailask;
+	}
+
+	public String getFollowup() {
+		return followup;
+	}
+
+	public void setFollowup(String followup) {
+		this.followup = followup;
 	}
 
 	public String getWebsite() {
@@ -388,6 +397,14 @@ public class Pro {
 		this.emdate2 = emdate2;
 	}
 
+	public String getEmname2() {
+		return emname2;
+	}
+
+	public void setEmname2(String emname2) {
+		this.emname2 = emname2;
+	}
+
 	public String getEmtoname2() {
 		return emtoname2;
 	}
@@ -545,35 +562,37 @@ public class Pro {
 		return "Pro [id=" + id + ", bdmname=" + bdmname + ", firstres=" + firstres + ", lastres=" + lastres
 				+ ", currentstate=" + currentstate + ", cmpname=" + cmpname + ", lfstatus=" + lfstatus + ", pocstatus="
 				+ pocstatus + ", domain=" + domain + ", intrestserv=" + intrestserv + ", moredetail=" + moredetail
-				+ ", infoshared=" + infoshared + ", detailask=" + detailask + ", website=" + website + ", linkprof="
-				+ linkprof + ", region=" + region + ", coun=" + coun + ", time=" + time + ", cusbefore=" + cusbefore
-				+ ", timezone=" + timezone + ", maincontact=" + maincontact + ", mainlinkprof=" + mainlinkprof
-				+ ", mainemail=" + mainemail + ", mainmob=" + mainmob + ", secondcontact=" + secondcontact
-				+ ", secondlinkprof=" + secondlinkprof + ", secondemail=" + secondemail + ", secondmob=" + secondmob
-				+ ", emdate=" + emdate + ", emname=" + emname + ", emtoname=" + emtoname + ", emstate=" + emstate
-				+ ", emsummary=" + emsummary + ", emdate1=" + emdate1 + ", emname1=" + emname1 + ", emtoname1="
-				+ emtoname1 + ", emstate1=" + emstate1 + ", emsummary1=" + emsummary1 + ", emdate2=" + emdate2
-				+ ", emtoname2=" + emtoname2 + ", emstate2=" + emstate2 + ", emsummary2=" + emsummary2
-				+ ", cuscalldate=" + cuscalldate + ", isttime=" + isttime + ", fromname=" + fromname + ", callstatus="
-				+ callstatus + ", callsummery=" + callsummery + ", cuscalldate1=" + cuscalldate1 + ", isttime1="
-				+ isttime1 + ", fromname1=" + fromname1 + ", callstatus1=" + callstatus1 + ", callsummery1="
-				+ callsummery1 + ", cuscalldate2=" + cuscalldate2 + ", isttime2=" + isttime2 + ", fromname2="
-				+ fromname2 + ", callstatus2=" + callstatus2 + ", callsummery2=" + callsummery2 + ", email=" + email
-				+ ", getId()=" + getId() + ", getBdmname()=" + getBdmname() + ", getFirstres()=" + getFirstres()
-				+ ", getLastres()=" + getLastres() + ", getCurrentstate()=" + getCurrentstate() + ", getCmpname()="
-				+ getCmpname() + ", getLfstatus()=" + getLfstatus() + ", getPocstatus()=" + getPocstatus()
-				+ ", getDomain()=" + getDomain() + ", getIntrestserv()=" + getIntrestserv() + ", getMoredetail()="
-				+ getMoredetail() + ", getInfoshared()=" + getInfoshared() + ", getDetailask()=" + getDetailask()
-				+ ", getWebsite()=" + getWebsite() + ", getLinkprof()=" + getLinkprof() + ", getRegion()=" + getRegion()
-				+ ", getCoun()=" + getCoun() + ", getTime()=" + getTime() + ", getCusbefore()=" + getCusbefore()
-				+ ", getTimezone()=" + getTimezone() + ", getMaincontact()=" + getMaincontact() + ", getMainlinkprof()="
-				+ getMainlinkprof() + ", getMainemail()=" + getMainemail() + ", getMainmob()=" + getMainmob()
-				+ ", getSecondcontact()=" + getSecondcontact() + ", getSecondlinkprof()=" + getSecondlinkprof()
-				+ ", getSecondemail()=" + getSecondemail() + ", getSecondmob()=" + getSecondmob() + ", getEmdate()="
-				+ getEmdate() + ", getEmname()=" + getEmname() + ", getEmtoname()=" + getEmtoname() + ", getEmstate()="
-				+ getEmstate() + ", getEmsummary()=" + getEmsummary() + ", getEmdate1()=" + getEmdate1()
-				+ ", getEmname1()=" + getEmname1() + ", getEmtoname1()=" + getEmtoname1() + ", getEmstate1()="
-				+ getEmstate1() + ", getEmsummary1()=" + getEmsummary1() + ", getEmdate2()=" + getEmdate2()
+				+ ", infoshared=" + infoshared + ", detailask=" + detailask + ", followup=" + followup + ", website="
+				+ website + ", linkprof=" + linkprof + ", region=" + region + ", coun=" + coun + ", time=" + time
+				+ ", cusbefore=" + cusbefore + ", timezone=" + timezone + ", maincontact=" + maincontact
+				+ ", mainlinkprof=" + mainlinkprof + ", mainemail=" + mainemail + ", mainmob=" + mainmob
+				+ ", secondcontact=" + secondcontact + ", secondlinkprof=" + secondlinkprof + ", secondemail="
+				+ secondemail + ", secondmob=" + secondmob + ", emdate=" + emdate + ", emname=" + emname + ", emtoname="
+				+ emtoname + ", emstate=" + emstate + ", emsummary=" + emsummary + ", emdate1=" + emdate1 + ", emname1="
+				+ emname1 + ", emtoname1=" + emtoname1 + ", emstate1=" + emstate1 + ", emsummary1=" + emsummary1
+				+ ", emdate2=" + emdate2 + ", emname2=" + emname2 + ", emtoname2=" + emtoname2 + ", emstate2="
+				+ emstate2 + ", emsummary2=" + emsummary2 + ", cuscalldate=" + cuscalldate + ", isttime=" + isttime
+				+ ", fromname=" + fromname + ", callstatus=" + callstatus + ", callsummery=" + callsummery
+				+ ", cuscalldate1=" + cuscalldate1 + ", isttime1=" + isttime1 + ", fromname1=" + fromname1
+				+ ", callstatus1=" + callstatus1 + ", callsummery1=" + callsummery1 + ", cuscalldate2=" + cuscalldate2
+				+ ", isttime2=" + isttime2 + ", fromname2=" + fromname2 + ", callstatus2=" + callstatus2
+				+ ", callsummery2=" + callsummery2 + ", email=" + email + ", getId()=" + getId() + ", getBdmname()="
+				+ getBdmname() + ", getFirstres()=" + getFirstres() + ", getLastres()=" + getLastres()
+				+ ", getCurrentstate()=" + getCurrentstate() + ", getCmpname()=" + getCmpname() + ", getLfstatus()="
+				+ getLfstatus() + ", getPocstatus()=" + getPocstatus() + ", getDomain()=" + getDomain()
+				+ ", getIntrestserv()=" + getIntrestserv() + ", getMoredetail()=" + getMoredetail()
+				+ ", getInfoshared()=" + getInfoshared() + ", getDetailask()=" + getDetailask() + ", getFollowup()="
+				+ getFollowup() + ", getWebsite()=" + getWebsite() + ", getLinkprof()=" + getLinkprof()
+				+ ", getRegion()=" + getRegion() + ", getCoun()=" + getCoun() + ", getTime()=" + getTime()
+				+ ", getCusbefore()=" + getCusbefore() + ", getTimezone()=" + getTimezone() + ", getMaincontact()="
+				+ getMaincontact() + ", getMainlinkprof()=" + getMainlinkprof() + ", getMainemail()=" + getMainemail()
+				+ ", getMainmob()=" + getMainmob() + ", getSecondcontact()=" + getSecondcontact()
+				+ ", getSecondlinkprof()=" + getSecondlinkprof() + ", getSecondemail()=" + getSecondemail()
+				+ ", getSecondmob()=" + getSecondmob() + ", getEmdate()=" + getEmdate() + ", getEmname()=" + getEmname()
+				+ ", getEmtoname()=" + getEmtoname() + ", getEmstate()=" + getEmstate() + ", getEmsummary()="
+				+ getEmsummary() + ", getEmdate1()=" + getEmdate1() + ", getEmname1()=" + getEmname1()
+				+ ", getEmtoname1()=" + getEmtoname1() + ", getEmstate1()=" + getEmstate1() + ", getEmsummary1()="
+				+ getEmsummary1() + ", getEmdate2()=" + getEmdate2() + ", getEmname2()=" + getEmname2()
 				+ ", getEmtoname2()=" + getEmtoname2() + ", getEmstate2()=" + getEmstate2() + ", getEmsummary2()="
 				+ getEmsummary2() + ", getCuscalldate()=" + getCuscalldate() + ", getIsttime()=" + getIsttime()
 				+ ", getFromname()=" + getFromname() + ", getCallstatus()=" + getCallstatus() + ", getCallsummery()="

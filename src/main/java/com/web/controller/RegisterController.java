@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.model.Login;
+import com.web.model.MyClass;
 import com.web.model.Otp;
 import com.web.model.Pro;
 import com.web.model.Register;
@@ -36,11 +37,12 @@ import com.web.repo.OtpRepo;
 import com.web.repo.ProRepo;
 import com.web.repo.Register1Repo;
 import com.web.repo.RegisterRepo;
+import com.web.service.EmailService;
 import com.web.service.Register1Imp;
 import com.web.service.RegisterImp;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = MyClass.BASE_URL)
 public class RegisterController {
 	@Autowired
 	private RegisterImp service;
@@ -60,6 +62,8 @@ public class RegisterController {
 	private OtpRepo otprepo;
 	@Autowired
 	private RegisterRepo regrepo;
+	@Autowired
+	private EmailService emailservice;
 
 	@PostMapping("/register")
 	public String addForm11(@RequestBody
@@ -72,11 +76,13 @@ public class RegisterController {
 		String cnpassword = customer.getCnpassword();
 		model.put("ename", ename);
 
-		Register reg = repo7.findByEmailAndMob(email, mob);
-
-		if (reg != null) {
+		Register reg = repo7.findByEmail(email);
+		Register reg1 = repo7.findByMob(mob);
+		if (reg != null || reg1 != null) {
 			return "regfail";
-		} else {
+		}
+
+		else {
 			Register newRegister = new Register();
 			newRegister.setEmail(email);
 			newRegister.setEname(ename);
@@ -142,8 +148,28 @@ public class RegisterController {
 	}
 
 	@PostMapping("/save")
-	public String addEmp(@RequestBody Register emp, ModelMap m) {
-		repo7.save(emp);
+	public String addEmp(@RequestBody Register emp, ModelMap m) throws MessagingException {
+		repo7.save(emp);// Sending Email
+		String mob = emp.getMob();
+		String email = emp.getEmail();
+		String recipientEmail = emp.getEmail();
+		String password = emp.getPassword();
+		String ename = emp.getEname();
+		String subject = "Onie Soft CRM : " + ename + " Registration is Successful !";
+		String body = "Dear " + ename + ",\n" + "Your Registration is Successful with Onie Soft CRM System.\n"
+				+ "The details are …\n" + "**************************\n" + "Name:" + ename + "\n" + "Mobile Number:"
+				+ mob + "\n" + "Email ID:" + email + "\n" + "Password:" + password + "\n"
+				+ "**************************\n"
+				+ "Please http://localhost:5173/login Onie Soft CRM System to check and further usage.\n"
+				+ "With Best Wishes,\n" + "Onie Soft CRM Support.\n" + "{support@oniesoft.com}";
+		emailservice.sendEmail(recipientEmail, subject, body);
+		String adminRecipientEmail = "contact@oniesoft.com";
+		String adminSubject = "New User " + ename + "Registered with Onie Soft CRM";
+		String adminBody = "**************************\n" + "Name:" + ename + "\n" + "Mobile Number:" + mob + "\n"
+				+ "Email ID:" + email + "\n" + "Password:" + password + "\n" + "**************************\n"
+				+ "Please check and confirm for further access.\n" + "With Best Wishes,\n" + "Onie Soft CRM Support.\n"
+				+ "{support@oniesoft.com}";
+		emailservice.sendEmail(adminRecipientEmail, adminSubject, adminBody);
 		return "Details Saved SucessFully";
 	}
 
@@ -190,10 +216,11 @@ public class RegisterController {
 		String cnpassword = customer.getCnpassword();
 		model.put("ename", ename);
 
-		Register1 reg = repo8.findByEmailAndMob(email, mob);
-
-		if (reg != null) {
+		Register1 reg = repo8.findByEmail(email);
+		Register1 reg1 = repo8.findByMob(mob);
+		if (reg != null || reg1 != null) {
 			return "regfail";
+
 		} else {
 			Register1 newRegister = new Register1();
 			newRegister.setId(id);

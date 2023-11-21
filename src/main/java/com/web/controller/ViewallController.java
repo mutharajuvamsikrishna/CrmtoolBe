@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.web.model.MyClass;
 import com.web.model.Otp;
 import com.web.model.Register;
 import com.web.model.Register1;
@@ -32,7 +33,7 @@ import com.web.service.Register1Imp;
 import com.web.service.RegisterImp;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = MyClass.BASE_URL)
 public class ViewallController {
 
 	@Autowired

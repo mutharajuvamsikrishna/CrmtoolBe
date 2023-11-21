@@ -16,4 +16,6 @@ public interface RegisterRepo extends CrudRepository<Register, String> {
 
 	Register findByEmail(String email);
 
+	Register findByMob(String mob);
+
 }
