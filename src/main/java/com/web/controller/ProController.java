@@ -1,6 +1,9 @@
 package com.web.controller;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.web.model.MyClass;
 import com.web.model.Pro;
 import com.web.repo.ProRepo;
+import com.web.service.EmailService;
 import com.web.service.ViewAddmoreDetails;
 
 @RestController
@@ -27,6 +31,8 @@ public class ProController {
 	private ProRepo repo1;
 	@Autowired
 	ViewAddmoreDetails service;
+	@Autowired
+	private EmailService emailservice;
 
 	@GetMapping("/req")
 
@@ -43,16 +49,85 @@ public class ProController {
 	}
 
 	@DeleteMapping(value = "/delete") // edited /per455
-	public String delete(@RequestParam Long id) {
-		repo1.deleteById(id);
+	public String delete(@RequestParam Long id) throws MessagingException {
+		Optional<Pro> proOptional = repo1.findById(id);
 
+		if (proOptional.isPresent()) {
+			Pro pro = proOptional.get();
+
+			String email = pro.getEmail();
+			String bdmname = pro.getBdmname();
+			String company = pro.getCmpname();
+			String country = pro.getCoun();
+			String intserv = pro.getIntrestserv();
+			String web = pro.getWebsite();
+			String followup = pro.getFollowup();
+			String region = pro.getRegion();
+			String custate = pro.getCurrentstate();
+			String domain = pro.getDomain();
+			String link = pro.getLinkprof();
+			String summary = pro.getMoredetail();
+
+			String subject = company + " CRM Details Deleted By " + bdmname;
+			String body = "Dear " + bdmname + "," + "\n" + "These details for  " + bdmname
+					+ "  are Deleted in Onie Soft CRM System." + "\n" + "**************************\n" + "ID:  " + id
+					+ "\n" + "BDM Name: " + bdmname + "\n" + "Current State: " + custate + "\n" + "Follow-Up Date: "
+					+ followup + "\n" + "Company Name: " + company + "\n" + "Industry: " + domain + "\n" + "Services: "
+					+ intserv + "\n" + "Region: " + region + "\n" + "Country: " + country + "\n" + "Website: " + web
+					+ "\n" + "Company LinkedIn Profile: " + link + "\n" + "Summary: " + summary + "\n"
+					+ "**************************";
+			emailservice.sendEmail(email, subject, body);
+			String adminRecipientEmail = "slrvamsikrishna@gmail.com";
+			String adminSubject = company + " CRM Details Deleted By " + bdmname;
+			String adminBody = "Dear Ramana," + "\n" + "These details for  " + bdmname + "  are Deleted"
+					+ " in Onie Soft CRM System." + "\n" + "**************************\n" + "ID:  " + id + "\n"
+					+ "BDM Name: " + bdmname + "\n" + "Current State: " + custate + "\n" + "Follow-Up Date: " + followup
+					+ "\n" + "Company Name: " + company + "\n" + "Industry: " + domain + "\n" + "Services: " + intserv
+					+ "\n" + "Region: " + region + "\n" + "Country: " + country + "\n" + "Website: " + web + "\n"
+					+ "Company LinkedIn Profile: " + link + "\n" + "Summary: " + summary + "\n"
+					+ "**************************";
+			emailservice.sendEmail(adminRecipientEmail, adminSubject, adminBody);
+			repo1.deleteById(id);
+		}
 		return "Deleted Sucess Fully";
 
 	}
 
 	@PutMapping("/usereditupdate")
-	public String updateUserEdit1(@RequestBody Pro pro) {
+	public String updateUserEdit1(@RequestBody Pro pro) throws MessagingException {
+		String email = pro.getEmail();
 
+		String bdmname = pro.getBdmname();
+		String company = pro.getCmpname();
+		String country = pro.getCoun();
+		String intserv = pro.getIntrestserv();
+		String web = pro.getWebsite();
+		String followup = pro.getFollowup();
+		String region = pro.getRegion();
+		String custate = pro.getCurrentstate();
+		String domain = pro.getDomain();
+		String link = pro.getLinkprof();
+		String summary = pro.getMoredetail();
+		Long id = pro.getId();
+		String subject = company + " CRM Details Updated By " + bdmname;
+		String body = "Dear " + bdmname + "," + "\n" + "These details for  " + bdmname
+				+ "  are Update and saved in Onie Soft CRM System." + "\n" + "**************************\n" + "ID:  "
+				+ id + "\n" + "BDM Name: " + bdmname + "\n" + "Current State: " + custate + "\n" + "Follow-Up Date: "
+				+ followup + "\n" + "Company Name: " + company + "\n" + "Industry: " + domain + "\n" + "Services: "
+				+ intserv + "\n" + "Region: " + region + "\n" + "Country: " + country + "\n" + "Website: " + web + "\n"
+				+ "Company LinkedIn Profile: " + link + "\n" + "Summary: " + summary + "\n"
+				+ "**************************";
+		emailservice.sendEmail(email, subject, body);
+		String adminRecipientEmail = "slrvamsikrishna@gmail.com";
+		String adminSubject = company + " CRM Details Updated By " + bdmname;
+		String adminBody = "Dear Ramana," + "\n" + "These details for  " + bdmname
+				+ "  are Update and saved in Onie Soft CRM System." + "\n" + "**************************\n" + "ID:  "
+				+ id + "\n" + "BDM Name: " + bdmname + "\n" + "Current State: " + custate + "\n" + "Follow-Up Date: "
+				+ followup + "\n" + "Company Name: " + company + "\n" + "Industry: " + domain + "\n" + "Services: "
+				+ intserv + "\n" + "Region: " + region + "\n" + "Country: " + country + "\n" + "Website: " + web + "\n"
+				+ "Company LinkedIn Profile: " + link + "\n" + "Summary: " + summary + "\n"
+				+ "**************************";
+		emailservice.sendEmail(adminRecipientEmail, adminSubject, adminBody);
 		return service.updateUserEdit(pro);
 	}
 

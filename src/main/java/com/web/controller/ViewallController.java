@@ -29,8 +29,6 @@ import com.web.repo.OtpRepo;
 import com.web.repo.ProRepo;
 import com.web.repo.Register1Repo;
 import com.web.repo.RegisterRepo;
-import com.web.service.Register1Imp;
-import com.web.service.RegisterImp;
 
 @RestController
 @CrossOrigin(origins = MyClass.BASE_URL)
@@ -39,10 +37,6 @@ public class ViewallController {
 	@Autowired
 	private ProRepo repo1;
 
-	@Autowired
-	private RegisterImp service;
-	@Autowired
-	private Register1Imp service1;
 	@Autowired
 	private RegisterRepo repo7;
 	@Autowired

@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,16 +37,11 @@ import com.web.repo.ProRepo;
 import com.web.repo.Register1Repo;
 import com.web.repo.RegisterRepo;
 import com.web.service.EmailService;
-import com.web.service.Register1Imp;
-import com.web.service.RegisterImp;
+import com.web.service.UserLoginService;
 
 @RestController
 @CrossOrigin(origins = MyClass.BASE_URL)
 public class RegisterController {
-	@Autowired
-	private RegisterImp service;
-	@Autowired
-	private Register1Imp service1;
 
 	@Autowired
 	private RegisterRepo repo7;
@@ -64,6 +58,8 @@ public class RegisterController {
 	private RegisterRepo regrepo;
 	@Autowired
 	private EmailService emailservice;
+	@Autowired
+	private UserLoginService userloginService;
 
 	@PostMapping("/register")
 	public String addForm11(@RequestBody
@@ -155,51 +151,26 @@ public class RegisterController {
 		String recipientEmail = emp.getEmail();
 		String password = emp.getPassword();
 		String ename = emp.getEname();
-		String subject = "Onie Soft CRM : " + ename + " Registration is Successful !";
+		String subject = "Onie Soft CRM: " + ename + " Registration is Successful !";
 		String body = "Dear " + ename + ",\n" + "Your Registration is Successful with Onie Soft CRM System.\n"
-				+ "The details are …\n" + "**************************\n" + "Name:" + ename + "\n" + "Mobile Number:"
-				+ mob + "\n" + "Email ID:" + email + "\n" + "Password:" + password + "\n"
+				+ "The details are …\n" + "**************************\n" + "Name: " + ename + "\n" + "Mobile Number: "
+				+ mob + "\n" + "Email ID: " + email + "\n" + "Password: " + password + "\n"
 				+ "**************************\n"
 				+ "Please http://localhost:5173/login Onie Soft CRM System to check and further usage.\n"
 				+ "With Best Wishes,\n" + "Onie Soft CRM Support.\n" + "{support@oniesoft.com}";
 		emailservice.sendEmail(recipientEmail, subject, body);
-		String adminRecipientEmail = "contact@oniesoft.com";
-		String adminSubject = "New User " + ename + "Registered with Onie Soft CRM";
-		String adminBody = "**************************\n" + "Name:" + ename + "\n" + "Mobile Number:" + mob + "\n"
-				+ "Email ID:" + email + "\n" + "Password:" + password + "\n" + "**************************\n"
-				+ "Please check and confirm for further access.\n" + "With Best Wishes,\n" + "Onie Soft CRM Support.\n"
-				+ "{support@oniesoft.com}";
+		String adminRecipientEmail = "slrvamsikrishna@gmail.com";
+		String adminSubject = ename + " Registered with Onie Soft CRM";
+		String adminBody = "**************************\n" + "Name: " + ename + "\n" + "Mobile Number: " + mob + "\n"
+				+ "Email ID: " + email + "\n" + "Password: " + password + "\n" + "**************************\n"
+				+ "Please check and confirm for further access.\n" + "With Best Wishes,\n" + "Onie Soft CRM Support.\n";
 		emailservice.sendEmail(adminRecipientEmail, adminSubject, adminBody);
 		return "Details Saved SucessFully";
 	}
 
 	@PostMapping("/loginform")
-	public String addForm(@RequestBody Login login, @ModelAttribute ModelMap model)
-
-	{
-		String email = login.getEmail();
-		String password = login.getPassword();
-
-		Register emp1 = repo7.findByEmailAndPassword(email, password);
-		if (emp1 == null) {
-			return "Invalid Credits";
-		}
-
-		model.addAttribute("command", emp1);
-
-		// start
-
-		Register log = service.login(login.getEmail(), login.getPassword());
-
-		if (log != null) {
-
-			return "personaldetails1";
-
-		} else {
-
-			return "delete1";
-		}
-
+	public String userloginController(@RequestBody Login login) {
+		return userloginService.userLogin(login);
 	}
 
 //admin Start123
@@ -290,40 +261,35 @@ public class RegisterController {
 	}
 
 	@PostMapping("/adminsave")
-	public String aminsave(@RequestBody Register1 emp, ModelMap m) {
+	public String aminsave(@RequestBody Register1 emp, ModelMap m) throws MessagingException {
 		repo8.save(emp);
+		String id = emp.getId();
+		String mob = emp.getMob();
+		String email = emp.getEmail();
+		String recipientEmail = emp.getEmail();
+		String password = emp.getPassword();
+		String ename = emp.getEname();
+		String subject = "Onie Soft CRM: " + ename + " Admin Registration is Successful !";
+		String body = "Dear " + ename + ",\n" + "Your Admin Registration is Successful with Onie Soft CRM System.\n"
+				+ "The details are …\n" + "**************************\n" + "ID: " + id + "\n" + "Name: " + ename + "\n"
+				+ "Mobile Number: " + mob + "\n" + "Email ID: " + email + "\n" + "Password: " + password + "\n"
+				+ "**************************\n"
+				+ "Please http://localhost:5173/login Onie Soft CRM System to check and further usage.\n"
+				+ "With Best Wishes,\n" + "Onie Soft CRM Support.\n" + "{support@oniesoft.com}";
+		emailservice.sendEmail(recipientEmail, subject, body);
+		String adminRecipientEmail = "slrvamsikrishna@gmail.com";
+		String adminSubject = ename + " Admin Registered with Onie Soft CRM";
+		String adminBody = "**************************\n" + "ID: " + id + "\n" + "Name: " + ename + "\n"
+				+ "Mobile Number: " + mob + "\n" + "Email ID: " + email + "\n" + "Password: " + password + "\n"
+				+ "**************************\n" + "Please check and confirm for further access.\n"
+				+ "With Best Wishes,\n" + "Onie Soft CRM Support.\n";
+		emailservice.sendEmail(adminRecipientEmail, adminSubject, adminBody);
 		return "adminsaved";
 	}
 
 	@PostMapping("/adminloginform")
-	public String adminlogin(@RequestBody Login login, @ModelAttribute ModelMap model)
-
-	{
-		String email = login.getEmail();
-		String password = login.getPassword();
-		System.out.println("log not null" + email);
-		System.out.println("log not null" + password);
-		Register1 emp1 = repo8.findByEmailAndPassword(email, password);
-		if (emp1 == null) {
-			System.out.println("emp1 is null");
-			return "Invalid Credits";
-
-		}
-		System.out.println("emp1 not  null");
-
-		// start
-
-		Register1 log = service1.login(login.getEmail(), login.getPassword());
-
-		if (log != null) {
-			System.out.println("log not null");
-			return "adminlogin";
-
-		} else {
-			System.out.println("log  null");
-			return "delete1";
-		}
-
+	public String adminloginController(@RequestBody Login login) {
+		return userloginService.adminLogin(login);
 	}
 
 	// admin end123
