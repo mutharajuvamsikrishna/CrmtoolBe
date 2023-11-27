@@ -69,7 +69,7 @@ public class ProController {
 			String summary = pro.getMoredetail();
 
 			String subject = company + " CRM Details Deleted By " + bdmname;
-			String body = "Dear " + bdmname + "," + "\n" + "These details for  " + bdmname
+			String body = "Dear " + bdmname + "," + "\n" + "These details for  " + company
 					+ "  are Deleted in Onie Soft CRM System." + "\n" + "**************************\n" + "ID:  " + id
 					+ "\n" + "BDM Name: " + bdmname + "\n" + "Current State: " + custate + "\n" + "Follow-Up Date: "
 					+ followup + "\n" + "Company Name: " + company + "\n" + "Industry: " + domain + "\n" + "Services: "
@@ -79,7 +79,7 @@ public class ProController {
 			emailservice.sendEmail(email, subject, body);
 			String adminRecipientEmail = "slrvamsikrishna@gmail.com";
 			String adminSubject = company + " CRM Details Deleted By " + bdmname;
-			String adminBody = "Dear Ramana," + "\n" + "These details for  " + bdmname + "  are Deleted"
+			String adminBody = "Dear Ramana," + "\n" + "These details for  " + company + "  are Deleted"
 					+ " in Onie Soft CRM System." + "\n" + "**************************\n" + "ID:  " + id + "\n"
 					+ "BDM Name: " + bdmname + "\n" + "Current State: " + custate + "\n" + "Follow-Up Date: " + followup
 					+ "\n" + "Company Name: " + company + "\n" + "Industry: " + domain + "\n" + "Services: " + intserv
@@ -110,7 +110,7 @@ public class ProController {
 		String summary = pro.getMoredetail();
 		Long id = pro.getId();
 		String subject = company + " CRM Details Updated By " + bdmname;
-		String body = "Dear " + bdmname + "," + "\n" + "These details for  " + bdmname
+		String body = "Dear " + bdmname + "," + "\n" + "These details for  " + company
 				+ "  are Update and saved in Onie Soft CRM System." + "\n" + "**************************\n" + "ID:  "
 				+ id + "\n" + "BDM Name: " + bdmname + "\n" + "Current State: " + custate + "\n" + "Follow-Up Date: "
 				+ followup + "\n" + "Company Name: " + company + "\n" + "Industry: " + domain + "\n" + "Services: "
@@ -120,7 +120,7 @@ public class ProController {
 		emailservice.sendEmail(email, subject, body);
 		String adminRecipientEmail = "slrvamsikrishna@gmail.com";
 		String adminSubject = company + " CRM Details Updated By " + bdmname;
-		String adminBody = "Dear Ramana," + "\n" + "These details for  " + bdmname
+		String adminBody = "Dear Ramana," + "\n" + "These details for  " + company
 				+ "  are Update and saved in Onie Soft CRM System." + "\n" + "**************************\n" + "ID:  "
 				+ id + "\n" + "BDM Name: " + bdmname + "\n" + "Current State: " + custate + "\n" + "Follow-Up Date: "
 				+ followup + "\n" + "Company Name: " + company + "\n" + "Industry: " + domain + "\n" + "Services: "
